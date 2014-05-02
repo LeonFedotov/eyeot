@@ -1,8 +1,8 @@
 #! /bin/bash
 
-print "Running server..."
+echo "Running server..."
 python bottle.py server
 
-print "Done."
+echo "Done."
 
 

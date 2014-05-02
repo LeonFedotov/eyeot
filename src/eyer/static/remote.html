@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>eyeR demonstration page</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,800italic,300,400,600,700,800"
+          rel="stylesheet" type="text/css">
+    <style>
+        /* reset */
+        /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            margin: 0;
+            padding: 0
+        }
+
+        article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+            display: block
+        }
+
+        body {
+            line-height: 1
+        }
+
+        ol, ul {
+            list-style: none
+        }
+
+        blockquote, q {
+            quotes: none
+        }
+
+        blockquote:before, blockquote:after, q:before, q:after {
+            content: none
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        /* Remote css */
+        body {
+            font-family: sans-serif, 'Open Sans';
+            background: #d3d3d3;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .container {
+            width: 200px;
+            margin: 20px auto;
+            padding: 30px;
+        }
+
+        .remote {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 10px;
+            background: #3e3f41;
+
+        }
+
+        .button {
+            display: block;
+            border-radius: 8px;
+            background: orangered;
+
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+
+            padding: 15px;
+
+            text-decoration: none;
+        }
+
+
+    </style>
+
+    <link rel="stylesheet" href="static/jquery.eyekit.css" type="text/css"/>
+</head>
+<body>
+
+<div class="container">
+    <h1>Remote</h1>
+
+    <div class="remote">
+        <a class="button power" href="#">
+            Toggle Power
+        </a>
+    </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="static/jquery.eyekit.js"></script>
+
+<script>
+    $(function () {
+       $('.remote > .button').hoverClick().click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/ac/togglePower',
+            success: function(data){
+                if (data.response=="ok") {
+                    console.log("cool");
+                }
+            },
+            dataType: 'json'
+        })
+       });
+    })
+</script>
+</body>
+</html>

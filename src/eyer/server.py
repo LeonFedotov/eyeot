@@ -17,4 +17,4 @@ def main():
 
 ac = eyeot.ACRemoteController()
 
-run(host='localhost', port=80, debug=True)
+run(host='0.0.0.0', port=80, debug=True)

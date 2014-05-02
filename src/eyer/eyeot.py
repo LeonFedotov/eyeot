@@ -18,8 +18,9 @@
 # mode2 -md /dev/lirc0 > raw_codes.raw
 # send power button of air condition
 # save the data, remove the first spaces (a long number) which is irrelevant
+#irsend SEND_ONCE acond power
 """
-root@raspberrypi:/home/tal# cat /etc/modules        
+root@raspberrypi:/home/tal# cat /etc/modules
 # /etc/modules: kernel modules to load at boot time.
 #
 # This file contains the names of kernel modules that should be loaded
@@ -32,7 +33,7 @@ lirc_rpi gpio_in_pin=23 gpio_out_pin=22
 """
 
 """
-root@raspberrypi:/home/tal# cat /etc/lirc/hardware.conf 
+root@raspberrypi:/home/tal# cat /etc/lirc/hardware.conf
 # /etc/lirc/hardware.conf
 #
 # Arguments which will be used when launching lircd
@@ -49,14 +50,14 @@ LOAD_MODULES=true
 
 # Run "lircd --driver=help" for a list of supported drivers.
 DRIVER="default"
-# usually /dev/lirc0 is the correct setting for systems using udev 
+# usually /dev/lirc0 is the correct setting for systems using udev
 DEVICE="/dev/lirc0"
 MODULES="lirc_rpi"
 
 # Default configuration files for your hardware if any
 LIRCD_CONF=""
 LIRCMD_CONF=""
-root@raspberrypi:/home/tal# 
+root@raspberrypi:/home/tal#
 
 """
 
@@ -144,5 +145,38 @@ end remote
 """
 
 import os
-import lirc
+#import lirc
+import subprocess
 
+class RemoteController(object):
+  """Base class for remote controllers"""
+  def __init__(self, controller_name):
+    self.name = controller_name
+
+  def _get_send_command(self, cmd):
+    return ['irsend','SEND_ONCE', self.name, cmd]
+
+  def send_command(cmd):
+    """
+    @return true on success, false on any error
+    """
+    try:
+      subprocess.check_call(self._get_send_command(cmd))
+      return True
+    except:
+      return False
+
+
+class ACRemoteController(RemoteController):
+  POWER = "power"
+  CONFIG_NAME = "acond"
+  def __init__(self):
+    super(ACRemoteController, self).__init__(self.CONFIG_NAME)
+
+  def power_on(self):
+    return self.send_command(self.POWER)
+  def power_off(self):
+    """
+    Powering on and off the A/C is currently the same command
+    """
+    return self.send_command(self.POWER)

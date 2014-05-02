@@ -156,7 +156,7 @@ class RemoteController(object):
   def _get_send_command(self, cmd):
     return ['irsend','SEND_ONCE', self.name, cmd]
 
-  def send_command(cmd):
+  def send_command(self, cmd):
     """
     @return true on success, false on any error
     """

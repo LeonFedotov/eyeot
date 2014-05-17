@@ -1,6 +1,29 @@
 The EyeOT project
 
-Authors:
+EyeOT (Eye + IOT - Internet Of Things)
+
+This project was created as part of the "Eyewriter Hackathon" in Tel-Aviv(2014).
+
+The purpose of the project was to create a usable product that utilize 
+the Eyecan project (https://code.google.com/p/eyecan/) to control
+the components in the user's room using only his/her eyes.
+
+
+In our demo, we presented the ability to control the Air conditioner using an IR led connected to a
+Raspberry Pi. In order to control the A/C, the user could surf to a custom website that supplied a
+focus-to-click button that in order to activate the button, the user had to focus on it for several seconds
+(This way, we prevented the user from clicking on the button by mistake)
+
+
+This project is based on the research of
+Alex Bain: http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/
+and
+Stavros Korokithakis: http://www.stavros.io/posts/how-turn-your-raspberry-pi-infrared-remote-control/
+
+thank you :-)
+
+
+EyeOT's Authors:
 Shlomi Atar
 Leon Fedotov
 Jonathan Hadari
